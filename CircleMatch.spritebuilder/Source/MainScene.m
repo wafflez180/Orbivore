@@ -10,7 +10,7 @@
 #import "circleBlue.h"
 #import "circleGreen.h"
 #import "circleOrange.h"
-
+#include <iAd/iAd.h>
 
 @implementation MainScene{
     CCSprite *goalBlue;
@@ -26,6 +26,7 @@
     BOOL paused;
     BOOL firsttime;
     BOOL showedonecircle;
+    BOOL lostgame;
     CCNodeColor *mainNodePopup;
     CCButton *startGameButton;
     CCSprite *circlesymbol;
@@ -37,6 +38,11 @@
     CCLabelTTF *tutorialLabel;
     CCLabelTTF *YourReady;
     CCNode *tutorialNode;
+    CCButton *tryAgain;
+    CCLabelTTF *bestscoreLabel;
+    CCLabelTTF *highscoreLabel;
+    int highscore;
+    ADBannerView *_bannerView;
 }
 
 -(void)didLoadFromCCB{
@@ -52,7 +58,18 @@
     
     score = 0;
     
+    lostgame = FALSE;
+    tryAgain.enabled = FALSE;
+    tryAgain.visible = FALSE;
+    
     firsttime = TRUE;
+    
+    highscore = 0;
+    
+    bestscoreLabel.visible = TRUE;
+    bestscoreLabel.string = [NSString stringWithFormat:@"BEST: %i", highscore];
+    
+    highscoreLabel.visible = FALSE;
     
     thumbUpGesture.opacity = 0;
     
@@ -66,6 +83,34 @@
 }
 
 -(void)update:(CCTime)delta{
+    
+    if (score < 10) {
+        
+        physicsNode.physicsNode.gravity = ccp(-200, 0);
+        self.spawnRate = 1;
+    }
+    if (score > 10) {
+        physicsNode.physicsNode.gravity = ccp(-300, 0);
+        self.spawnRate = 0.8;
+    }
+    if (score > 15) {
+        physicsNode.physicsNode.gravity = ccp(-350, 0);
+        self.spawnRate = 0.7;
+    }
+
+    if (score > 25) {
+        physicsNode.physicsNode.gravity = ccp(-400, 0);
+        self.spawnRate = 0.6;
+    }
+    if (score > 50) {
+        physicsNode.physicsNode.gravity = ccp(-400, 0);
+        self.spawnRate = 0.5;
+    }
+
+    if (paused && startGameButton.enabled) {
+        [circlesHolder removeAllChildren];
+    }
+    
     scoreLabel.string = [NSString stringWithFormat:@"%i", score];
     
     if (firsttime == TRUE && startGameButton.enabled == FALSE) {
@@ -84,34 +129,59 @@
 }
 
 -(void)startgame{
+    
+    score = 0;
+    
     if (firsttime != TRUE) {
     paused = FALSE;
     startGameButton.enabled = FALSE;
     startGameButton.visible = FALSE;
+        tryAgain.enabled = FALSE;
+        tryAgain.visible = FALSE;
+        
     [self spawncircles];
+        [bestscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
+        [highscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
     [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
     [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
-        
+    circlesHolder.userInteractionEnabled = TRUE;
     tutorialNode.visible = FALSE;
 
     }else{
         startGameButton.enabled = FALSE;
         startGameButton.visible = FALSE;
+        tryAgain.enabled = FALSE;
+        tryAgain.visible = FALSE;
         [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
         [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
+        [bestscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
+        [highscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
         
         [self starttutorial];
     }
-    circlesHolder.userInteractionEnabled = FALSE;
 }
 
 -(void)losegame{
     paused = TRUE;
+    
+    if (highscore < score) {
+        highscore = score;
+    }
+    bestscoreLabel.visible = TRUE;
+    bestscoreLabel.string = [NSString stringWithFormat:@"BEST: %i", highscore];
+    highscoreLabel.visible = TRUE;
+    highscoreLabel.string = [NSString stringWithFormat:@"SCORE: %i", score];
+    
     score = 0;
     [circlesHolder removeAllChildren];
     circlesHolder.userInteractionEnabled = FALSE;
     startGameButton.enabled = TRUE;
     startGameButton.visible = TRUE;
+    tryAgain.enabled = TRUE;
+    tryAgain.visible = TRUE;
+    lostgame = TRUE;
+    [bestscoreLabel runAction:[CCActionFadeIn actionWithDuration:1]];
+    [highscoreLabel runAction:[CCActionFadeIn actionWithDuration:1]];
     [mainNodePopup runAction:[CCActionFadeIn actionWithDuration:1]];
     [circlesymbol runAction:[CCActionFadeIn actionWithDuration:1]];
 }
@@ -248,6 +318,7 @@
         
         id sequence = [CCActionSequence actions:bouncein,reposition, fadeout,nil];
 
+        circlesHolder.userInteractionEnabled = TRUE;
         
         [thumbUpGesture runAction:sequence];
         
@@ -277,7 +348,7 @@
     [self spawnorangecircles];
     }
     
-    [self performSelector:@selector(spawncircles) withObject:nil afterDelay:1];
+    [self performSelector:@selector(spawncircles) withObject:nil afterDelay:self.spawnRate];
         
     }
 }
@@ -365,17 +436,9 @@
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleBlue:(CCSprite *)touchedCircleBlue shotAtGreen:(CCSprite *)shotAtGreen {
     
-    [touchedCircleBlue removeFromParent];
-    
-    [self losegame];
-    
     return TRUE;
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleBlue:(CCSprite *)touchedCircleBlue shotAtOrange:(CCSprite *)shotAtOrange {
-    
-    [touchedCircleBlue removeFromParent];
-    
-    [self losegame];
     
     return TRUE;
 }
@@ -383,10 +446,6 @@
 // COLLISIONS WITH GREEN CIRCLE
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleGreen:(CCSprite *)touchedCircleGreen shotAtBlue:(CCSprite *)shotAtBlue {
-    
-    [touchedCircleGreen removeFromParent];
-    
-    [self losegame];
     
     return TRUE;
 }
@@ -416,10 +475,6 @@
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleGreen:(CCSprite *)touchedCircleGreen shotAtOrange:(CCSprite *)shotAtOrange {
     
-    [touchedCircleGreen removeFromParent];
-    
-    [self losegame];
-    
     return TRUE;
 }
 
@@ -427,17 +482,9 @@
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleOrange:(CCSprite *)touchedCircleOrange shotAtBlue:(CCSprite *)shotAtBlue {
     
-    [touchedCircleOrange removeFromParent];
-    
-    [self losegame];
-    
     return TRUE;
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleOrange:(CCSprite *)touchedCircleOrange shotAtGreen:(CCSprite *)shotAtGreen {
-    
-    [touchedCircleOrange removeFromParent];
-    
-    [self losegame];
     
     return TRUE;
 }
@@ -476,7 +523,7 @@
     [touchedCircleOrange removeFromParent];
     
     [self losegame];
-    
+
     return TRUE;
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleBlue:(CCSprite *)touchedCircleBlue offbounds:(CCNodeColor *)offbounds {
@@ -543,6 +590,76 @@
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleOrange:(CCSprite *)touchedCircleOrange touchedCircleBlue:(CCSprite *)touchedCircleBlue {
     return NO;
+}
+
+# pragma mark - iAd code
+
+-(id)init
+{
+    if( (self= [super init]) )
+    {
+        // On iOS 6 ADBannerView introduces a new initializer, use it when available.
+        if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
+            _adView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
+            
+        } else {
+            _adView = [[ADBannerView alloc] init];
+        }
+        
+        // GETS THE HEIGHT OF THE DEVICE
+        
+        float screenBounds = [UIScreen mainScreen].bounds.size.height;
+
+        float tempint = screenBounds;
+        
+        CGRect adFrame = _adView.frame;
+        adFrame.origin.y = tempint - _adView.frame.size.height;
+        adFrame.origin.x = self.contentSizeInPoints.width / 2;
+        _adView.frame = adFrame;
+        
+        // MAKES THE BANNER GO TO THE BOTTOM OF THE SCREEN
+        
+        _adView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
+        _adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        [[[CCDirector sharedDirector]view]addSubview:_adView];
+        [_adView setBackgroundColor:[UIColor clearColor]];
+        [[[CCDirector sharedDirector]view]addSubview:_adView];
+        
+        _adView.delegate = self;
+        
+    }
+    [self layoutAnimated:YES];
+    return self;
+}
+
+
+- (void)layoutAnimated:(BOOL)animated
+{
+    // As of iOS 6.0, the banner will automatically resize itself based on its width.
+    // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
+    CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
+
+        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    
+    CGRect bannerFrame = _bannerView.frame;
+    if (_bannerView.bannerLoaded) {
+        contentFrame.size.height -= _bannerView.frame.size.height;
+        bannerFrame.origin.y = contentFrame.size.height;
+    } else {
+        bannerFrame.origin.y = contentFrame.size.height;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        _bannerView.frame = bannerFrame;
+    }];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    [self layoutAnimated:YES];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    [self layoutAnimated:YES];
 }
 
 @end

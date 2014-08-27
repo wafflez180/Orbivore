@@ -7,7 +7,12 @@
 //
 
 #import "CCNode.h"
+#include <iAd/iAd.h>
 
-@interface MainScene : CCNode <CCPhysicsCollisionDelegate>
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate, ADBannerViewDelegate>
+
+@property (nonatomic) float spawnRate;
+
+@property ADBannerView* adView;
 
 @end

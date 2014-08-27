@@ -25,6 +25,9 @@
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
+    if (self.parent.userInteractionEnabled != FALSE) {
+
+    
         CGPoint touchLocation = [touch locationInWorld];
         
         self.position = touchLocation;
@@ -34,8 +37,12 @@
         self.physicsBody.sleeping = FALSE;
         
         originalBlueLocation = touchLocation;
+    }
 }
 -(void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    if (self.parent.userInteractionEnabled != FALSE) {
+
         
         CGPoint touchLocation = [touch locationInWorld];
         
@@ -43,11 +50,12 @@
         self.physicsBody.affectedByGravity = FALSE;
         self.physicsBody.allowsRotation = FALSE;
         self.physicsBody.velocity = ccp(0, 0);
+    }
 }
 
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    if(self.userInteractionEnabled == TRUE){
+    if(self.userInteractionEnabled == TRUE && self.parent.userInteractionEnabled == TRUE){
         
         CGPoint touchLocation = [touch locationInWorld];
         
@@ -123,7 +131,7 @@
 
 -(void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    if(self.userInteractionEnabled == TRUE){
+    if(self.userInteractionEnabled == TRUE && self.parent.userInteractionEnabled == TRUE){
         
         CGPoint touchLocation = [touch locationInWorld];
         
