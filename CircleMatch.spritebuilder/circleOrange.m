@@ -11,9 +11,7 @@
 @implementation circleOrange{
     
     CGPoint originalBlueLocation;
-    CGFloat originalMass;
-    BOOL touchedBlue;
-    
+    CGFloat originalMass;    
 }
 
 - (void)didLoadFromCCB
@@ -23,13 +21,10 @@
     self.userInteractionEnabled = TRUE;
     self.zOrder = 0;
     originalMass = self.physicsBody.mass;
-    touchedBlue = FALSE;
 }
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    if(touchedBlue == FALSE){
-        
         CGPoint touchLocation = [touch locationInWorld];
         
         self.position = touchLocation;
@@ -39,14 +34,8 @@
         self.physicsBody.sleeping = FALSE;
         
         originalBlueLocation = touchLocation;
-        
-    }
-    
 }
 -(void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
-    
-    if(touchedBlue == FALSE){
-        
         
         CGPoint touchLocation = [touch locationInWorld];
         
@@ -54,14 +43,11 @@
         self.physicsBody.affectedByGravity = FALSE;
         self.physicsBody.allowsRotation = FALSE;
         self.physicsBody.velocity = ccp(0, 0);
-        
-    }
-    
 }
 
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    if(touchedBlue == FALSE && self.userInteractionEnabled == TRUE){
+    if(self.userInteractionEnabled == TRUE){
         
         CGPoint touchLocation = [touch locationInWorld];
         
@@ -103,18 +89,41 @@
         
         self.physicsBody.mass = originalMass;
         
+        if (calculatedImpulseLocation.x < 2 && calculatedImpulseLocation.x > -2) {
+            self.physicsBody.affectedByGravity = TRUE;
+            self.physicsBody.allowsRotation = FALSE;
+            self.physicsBody.sleeping = FALSE;
+            calculatedImpulseLocation.x = 2;
+        }
+        if (calculatedImpulseLocation.y < 2 && calculatedImpulseLocation.y > -2) {
+            self.physicsBody.affectedByGravity = TRUE;
+            self.physicsBody.allowsRotation = FALSE;
+            self.physicsBody.sleeping = FALSE;
+            calculatedImpulseLocation.y = 2;
+        }
+        
+        self.physicsBody.velocity = ccp(1,1);
+        [self.physicsBody setVelocity:ccp(1, 1)];
+        
+        self.physicsBody.mass = 3;
+        
+        if (isnan(self.physicsBody.velocity.x)) {
+            NSLog(@"ORANGE CIRCLE NAN DETECTED = %f", self.physicsBody.velocity.x);
+        }
+        if (isnan(self.physicsBody.velocity.y)) {
+            NSLog(@"ORANGE CIRCLE NAN DETECTED = %f", self.physicsBody.velocity.y);
+        }
+        
         NSLog(@"Applied Impulse: %f, %f", calculatedImpulseLocation.x, calculatedImpulseLocation.y);
         
         [self.physicsBody applyImpulse:calculatedImpulseLocation];
-        
-        touchedBlue = TRUE;
         
     }
 }
 
 -(void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    if(touchedBlue == FALSE && self.userInteractionEnabled == TRUE){
+    if(self.userInteractionEnabled == TRUE){
         
         CGPoint touchLocation = [touch locationInWorld];
         
@@ -156,12 +165,22 @@
         
         self.physicsBody.mass = originalMass;
         
+        if (calculatedImpulseLocation.x < 2 && calculatedImpulseLocation.x > -2) {
+            self.physicsBody.affectedByGravity = TRUE;
+            self.physicsBody.allowsRotation = FALSE;
+            self.physicsBody.sleeping = FALSE;
+            calculatedImpulseLocation.x = 2;
+        }
+        if (calculatedImpulseLocation.y < 2 && calculatedImpulseLocation.y > -2) {
+            self.physicsBody.affectedByGravity = TRUE;
+            self.physicsBody.allowsRotation = FALSE;
+            self.physicsBody.sleeping = FALSE;
+            calculatedImpulseLocation.y = 2;
+        }
+        
         NSLog(@"Applied Impulse: %f, %f", calculatedImpulseLocation.x, calculatedImpulseLocation.y);
         
         [self.physicsBody applyImpulse:calculatedImpulseLocation];
-        
-        touchedBlue = TRUE;
-        
     }
 }
 @end

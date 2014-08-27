@@ -130,6 +130,16 @@
 			<key>scaleFrom</key>
 			<integer>2</integer>
 		</dict>
+		<key>Platformer-Pixel164@4x.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Platformer-Pixel166@4x.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
 		<key>Sprites</key>
 		<dict/>
 		<key>ccbResources</key>

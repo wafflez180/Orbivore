@@ -21,13 +21,28 @@
     circleGreen* thecircleGreen;
     circleOrange* thecircleOrange;
     CGPoint calculatedImpulseLocation;
-    int wrong;
     int score;
     CCLabelTTF *scoreLabel;
+    BOOL paused;
+    BOOL firsttime;
+    BOOL showedonecircle;
+    CCNodeColor *mainNodePopup;
+    CCButton *startGameButton;
+    CCSprite *circlesymbol;
+    CCNode *circlesHolder;
+    CCSprite *pressHoldGesture;
+    CCSprite *singleTapGesture;
+    CCSprite *nothingtapGesture;
+    CCSprite *thumbUpGesture;
+    CCLabelTTF *tutorialLabel;
+    CCLabelTTF *YourReady;
+    CCNode *tutorialNode;
 }
 
 -(void)didLoadFromCCB{
-    self.userInteractionEnabled = true;
+    
+    paused = TRUE;
+    self.userInteractionEnabled = TRUE;
     
     goalBlue.physicsBody.collisionType = @"shotAtBlue";
     goalGreen.physicsBody.collisionType = @"shotAtGreen";
@@ -35,18 +50,220 @@
     
     physicsNode.collisionDelegate = self;
     
-    [self spawncircles];
-    
     score = 0;
-    wrong = 0;
+    
+    firsttime = TRUE;
+    
+    thumbUpGesture.opacity = 0;
+    
+    tutorialNode.visible = FALSE;
+    thumbUpGesture.visible = FALSE;
+    nothingtapGesture.visible = FALSE;
+    singleTapGesture.visible = FALSE;
+    pressHoldGesture.visible = FALSE;
+    tutorialLabel.visible = FALSE;
     
 }
 
 -(void)update:(CCTime)delta{
     scoreLabel.string = [NSString stringWithFormat:@"%i", score];
+    
+    if (firsttime == TRUE && startGameButton.enabled == FALSE) {
+        
+        tutorialLabel.visible = TRUE;
+    }else{
+        tutorialLabel.visible = FALSE;
+    }
+    
+    if (thumbUpGesture.opacity == 0) {
+        YourReady.visible = FALSE;
+    }else{
+        YourReady.visible = TRUE;
+    }
+    
+}
+
+-(void)startgame{
+    if (firsttime != TRUE) {
+    paused = FALSE;
+    startGameButton.enabled = FALSE;
+    startGameButton.visible = FALSE;
+    [self spawncircles];
+    [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
+    [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
+        
+    tutorialNode.visible = FALSE;
+
+    }else{
+        startGameButton.enabled = FALSE;
+        startGameButton.visible = FALSE;
+        [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
+        [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
+        
+        [self starttutorial];
+    }
+    circlesHolder.userInteractionEnabled = FALSE;
+}
+
+-(void)losegame{
+    paused = TRUE;
+    score = 0;
+    [circlesHolder removeAllChildren];
+    circlesHolder.userInteractionEnabled = FALSE;
+    startGameButton.enabled = TRUE;
+    startGameButton.visible = TRUE;
+    [mainNodePopup runAction:[CCActionFadeIn actionWithDuration:1]];
+    [circlesymbol runAction:[CCActionFadeIn actionWithDuration:1]];
+}
+
+-(void)starttutorial{
+    
+    tutorialNode.visible = TRUE;
+    
+    tutorialLabel.visible = TRUE;
+    
+    tutorialLabel.string = @"Tutorial";
+    
+    pressHoldGesture.visible = FALSE;
+    singleTapGesture.visible = FALSE;
+    nothingtapGesture.visible = FALSE;
+    
+    if (showedonecircle == FALSE) {
+    thecircleBlue = (circleBlue*)[CCBReader load:@"circleBlue"];
+    
+    thecircleBlue.positionInPoints = ccp(physicsNode.contentSizeInPoints.width * 1.5, physicsNode.contentSizeInPoints.height / 1.95);
+    
+    [circlesHolder addChild:thecircleBlue];
+        
+    thecircleBlue.userInteractionEnabled = FALSE;
+        
+    }else{
+        thecircleGreen = (circleGreen*)[CCBReader load:@"circleGreen"];
+        
+        thecircleGreen.positionInPoints = ccp(physicsNode.contentSizeInPoints.width * 1.5, physicsNode.contentSizeInPoints.height / 1.95);
+        
+        [circlesHolder addChild:thecircleGreen];
+        
+        thecircleGreen.userInteractionEnabled = FALSE;
+    }
+    
+    singleTapGesture.visible = TRUE;
+    pressHoldGesture.visible = FALSE;
+    
+    [singleTapGesture runAction:[CCActionMoveTo actionWithDuration:1.8 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.95)]];
+    
+    [pressHoldGesture runAction:[CCActionMoveTo actionWithDuration:1.8 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.95)]];
+    
+    [nothingtapGesture runAction:[CCActionMoveTo actionWithDuration:1.8 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.95)]];
+    
+    if (showedonecircle != TRUE) {
+        
+    [self performSelector:@selector(tutorialflick:) withObject:thecircleBlue afterDelay:1.8];
+        
+    }else{
+        
+    [self performSelector:@selector(tutorialflick:) withObject:thecircleGreen afterDelay:1.8];
+        
+    }
+}
+
+-(void)tutorialflick:(CCSprite *)thecurrentcircle{
+    
+    singleTapGesture.visible = FALSE;
+    pressHoldGesture.visible = TRUE;
+    
+    thecurrentcircle.positionInPoints = pressHoldGesture.positionInPoints;
+    
+    NSString *originalXlocation = [NSString stringWithFormat: @"%f", pressHoldGesture.positionInPoints.x];
+    NSString *originalYlocation = [NSString stringWithFormat: @"%f", pressHoldGesture.positionInPoints.y];
+    
+    thecurrentcircle.physicsBody.affectedByGravity = FALSE;
+    thecurrentcircle.physicsBody.allowsRotation = FALSE;
+    thecurrentcircle.physicsBody.velocity = ccp(0, 0);
+    thecurrentcircle.physicsBody.sleeping = FALSE;
+    
+    if (showedonecircle != TRUE) {
+    
+    [pressHoldGesture runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2.5,physicsNode.contentSizeInPoints.height / 1.6)]];
+    
+    [nothingtapGesture runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2.5,physicsNode.contentSizeInPoints.height / 1.6)]];
+    
+    [thecurrentcircle runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2.5,physicsNode.contentSizeInPoints.height / 1.6)]];
+        
+    }else{
+        
+        [pressHoldGesture runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.6)]];
+        
+        [nothingtapGesture runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.6)]];
+        
+        [thecurrentcircle runAction:[CCActionMoveTo actionWithDuration:.5 position:ccp(physicsNode.contentSizeInPoints.width / 2,physicsNode.contentSizeInPoints.height / 1.6)]];
+        
+    }
+    
+    NSArray *locations = [NSArray arrayWithObjects:originalXlocation,originalYlocation, thecurrentcircle,nil];
+    
+    [self performSelector:@selector(tutorialapplyimpulse:) withObject:locations afterDelay:0.5];
+    
+}
+
+-(void)tutorialapplyimpulse: (NSArray*)originallocation{
+    
+    pressHoldGesture.visible = FALSE;
+    nothingtapGesture.visible = TRUE;
+    
+    float xlocation = [originallocation[0] floatValue];
+    float ylocation = [originallocation[1] floatValue];
+    CCSprite *thecurrentcircle = originallocation[2];
+    
+    calculatedImpulseLocation.x = xlocation - pressHoldGesture.positionInPoints.x;
+    calculatedImpulseLocation.y = ylocation - pressHoldGesture.positionInPoints.y;
+    
+    calculatedImpulseLocation.x = -calculatedImpulseLocation.x * 100;
+    calculatedImpulseLocation.y = -calculatedImpulseLocation.y * 100;
+    
+    [thecurrentcircle.physicsBody applyImpulse:calculatedImpulseLocation];
+    
+    if (showedonecircle == TRUE) {
+        
+        pressHoldGesture.visible = FALSE;
+        nothingtapGesture.visible = FALSE;
+        singleTapGesture.visible = FALSE;
+        pressHoldGesture.positionInPoints = ccp(200.0, 15);
+        singleTapGesture.positionInPoints = ccp(200.0, 15);
+        nothingtapGesture.positionInPoints = ccp(200.0, 15);
+        
+        paused = FALSE;
+        
+        thumbUpGesture.opacity = 1;
+        
+        thumbUpGesture.visible = TRUE;
+        
+        thumbUpGesture.position = ccp(0.5, -0.5);
+        
+        id bouncein = [CCActionMoveTo actionWithDuration:1 position:ccp(0.5, 0.6)];
+        
+        id reposition = [CCActionMoveTo actionWithDuration:.25 position:ccp(0.5, 0.5)];
+        
+        id fadeout = [CCActionFadeOut actionWithDuration:1.5];
+        
+        id sequence = [CCActionSequence actions:bouncein,reposition, fadeout,nil];
+
+        
+        [thumbUpGesture runAction:sequence];
+        
+        [self performSelector:@selector(spawncircles) withObject:nil afterDelay:4];
+    
+        firsttime = FALSE;
+        
+    }else if(showedonecircle != TRUE){
+    showedonecircle = TRUE;
+        [self starttutorial];
+    }
 }
 
 -(void)spawncircles{
+    
+    if (paused != TRUE) {
     
     float randomspawntime = arc4random() % 4;
     
@@ -61,6 +278,8 @@
     }
     
     [self performSelector:@selector(spawncircles) withObject:nil afterDelay:1];
+        
+    }
 }
 
 -(void)spawnbluecircles{
@@ -75,7 +294,7 @@
     
     thecircleBlue.positionInPoints = ccp(physicsNode.contentSizeInPoints.width * 1.5, physicsNode.contentSizeInPoints.height / random);
     
-    [physicsNode addChild:thecircleBlue];
+    [circlesHolder addChild:thecircleBlue];
     
     [thecircleBlue.physicsBody setSleeping:FALSE];
 }
@@ -91,7 +310,7 @@
     
     thecircleGreen.positionInPoints = ccp(physicsNode.contentSizeInPoints.width * 1.5, physicsNode.contentSizeInPoints.height / random);
     
-    [physicsNode addChild:thecircleGreen];
+    [circlesHolder addChild:thecircleGreen];
     
     [thecircleGreen.physicsBody setSleeping:FALSE];
 }
@@ -107,7 +326,7 @@
     
     thecircleOrange.positionInPoints = ccp(physicsNode.contentSizeInPoints.width * 1.5, physicsNode.contentSizeInPoints.height / random);
     
-    [physicsNode addChild:thecircleOrange];
+    [circlesHolder addChild:thecircleOrange];
     
     [thecircleOrange.physicsBody setSleeping:FALSE];
 }
@@ -124,7 +343,7 @@
     
     CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle3Fake.png"];
     
-    [self addChild:currentfake];
+    [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleBlue.position;
     
@@ -148,7 +367,7 @@
     
     [touchedCircleBlue removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -156,7 +375,7 @@
     
     [touchedCircleBlue removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -167,7 +386,7 @@
     
     [touchedCircleGreen removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -175,7 +394,7 @@
     
     CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle2Fake.png"];
     
-    [self addChild:currentfake];
+    [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleGreen.position;
     
@@ -199,7 +418,7 @@
     
     [touchedCircleGreen removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -210,7 +429,7 @@
     
     [touchedCircleOrange removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -218,7 +437,7 @@
     
     [touchedCircleOrange removeFromParent];
     
-    wrong++;
+    [self losegame];
     
     return TRUE;
 }
@@ -226,7 +445,7 @@
     
     CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle1Fake.png"];
     
-    [self addChild:currentfake];
+    [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleOrange.position;
     
@@ -256,6 +475,8 @@
     
     [touchedCircleOrange removeFromParent];
     
+    [self losegame];
+    
     return TRUE;
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleBlue:(CCSprite *)touchedCircleBlue offbounds:(CCNodeColor *)offbounds {
@@ -264,6 +485,8 @@
     
     [touchedCircleBlue removeFromParent];
     
+    [self losegame];
+    
     return TRUE;
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleGreen:(CCSprite *)touchedCircleGreen offbounds:(CCNodeColor *)offbounds {
@@ -271,6 +494,8 @@
     touchedCircleGreen.userInteractionEnabled = FALSE;
     
     [touchedCircleGreen removeFromParent];
+    
+    [self losegame];
     
     return TRUE;
 }
