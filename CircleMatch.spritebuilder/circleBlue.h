@@ -10,4 +10,6 @@
 
 @interface circleBlue : CCSprite
 
+@property (nonatomic) CGPoint circleposition;
+
 @end

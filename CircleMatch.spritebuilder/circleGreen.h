@@ -10,4 +10,6 @@
 
 @interface circleGreen : CCSprite
 
+@property (nonatomic) CGPoint circleposition;
+
 @end

@@ -52,7 +52,7 @@
 			<key>affectedByGravity</key>
 			<true/>
 			<key>allowsRotation</key>
-			<true/>
+			<false/>
 			<key>bodyShape</key>
 			<integer>1</integer>
 			<key>collisionCategories</key>
@@ -62,7 +62,7 @@
 			<key>collisionType</key>
 			<string></string>
 			<key>cornerRadius</key>
-			<real>30.061332702636719</real>
+			<real>58.5</real>
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
@@ -74,8 +74,8 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>36.307964324951172</real>
-					<real>37.754829406738281</real>
+					<real>72.703125</real>
+					<real>74.140625</real>
 				</array>
 			</array>
 			<key>polygons</key>
