@@ -84,29 +84,30 @@
 
 -(void)update:(CCTime)delta{
     
-    if (score < 10) {
+    if ( paused != TRUE) {
+        if (score < 10) {
+            
+            physicsNode.physicsNode.gravity = ccp(-200, 0);
+            self.spawnRate = 1;
+        }
+        if (score > 10) {
+            physicsNode.physicsNode.gravity = ccp(-300, 0);
+            self.spawnRate = 0.8;
+        }
+        if (score > 15) {
+            physicsNode.physicsNode.gravity = ccp(-350, 0);
+            self.spawnRate = 0.7;
+        }
         
-        physicsNode.physicsNode.gravity = ccp(-200, 0);
-        self.spawnRate = 1;
+        if (score > 25) {
+            physicsNode.physicsNode.gravity = ccp(-400, 0);
+            self.spawnRate = 0.6;
+        }
+        if (score > 50) {
+            physicsNode.physicsNode.gravity = ccp(-400, 0);
+            self.spawnRate = 0.5;
+        }
     }
-    if (score > 10) {
-        physicsNode.physicsNode.gravity = ccp(-300, 0);
-        self.spawnRate = 0.8;
-    }
-    if (score > 15) {
-        physicsNode.physicsNode.gravity = ccp(-350, 0);
-        self.spawnRate = 0.7;
-    }
-
-    if (score > 25) {
-        physicsNode.physicsNode.gravity = ccp(-400, 0);
-        self.spawnRate = 0.6;
-    }
-    if (score > 50) {
-        physicsNode.physicsNode.gravity = ccp(-400, 0);
-        self.spawnRate = 0.5;
-    }
-
     if (paused && startGameButton.enabled) {
         [circlesHolder removeAllChildren];
     }
@@ -124,6 +125,13 @@
         YourReady.visible = FALSE;
     }else{
         YourReady.visible = TRUE;
+    }
+    
+    if (paused) {
+        physicsNode.userInteractionEnabled = FALSE;
+        physicsNode.physicsNode.gravity = ccp(0,0);
+    }else{
+        physicsNode.userInteractionEnabled = TRUE;
     }
     
 }
@@ -162,6 +170,9 @@
 }
 
 -(void)losegame{
+    
+    if (paused == FALSE) {
+        
     paused = TRUE;
     
     if (highscore < score) {
@@ -184,6 +195,7 @@
     [highscoreLabel runAction:[CCActionFadeIn actionWithDuration:1]];
     [mainNodePopup runAction:[CCActionFadeIn actionWithDuration:1]];
     [circlesymbol runAction:[CCActionFadeIn actionWithDuration:1]];
+    }
 }
 
 -(void)starttutorial{
@@ -403,9 +415,17 @@
 }
 
 -(void)removefake:(CCSprite *)fake{
-    
-    [fake removeFromParent];
-    
+        // load particle effect
+        CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"correctParticles"];
+        // make the particle effect clean itself up, once it is completed
+        explosion.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the seals position
+        explosion.position = fake.position;
+        // add the particle effect to the same node the seal is on
+        [fake.parent addChild:explosion];
+        
+        // finally, remove the destroyed seal
+        [fake removeFromParent];
 }
 
 // COLLISIONS WITH BLUE CIRCLE

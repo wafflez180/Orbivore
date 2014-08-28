@@ -78,7 +78,7 @@
             calculatedImpulseLocation.y = 1;
         }
         
-        int limitedspeed = 5000;
+        int limitedspeed = 4000;
         
         //////// LIMITS THE SPEED OF THE BALL /////////
         
