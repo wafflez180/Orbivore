@@ -32,6 +32,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [MGWU loadMGWU:@"Family360"];
+    
+    [MGWU setAppiraterAppId:@"914284583" andAppName:@"Thrifter"];
+    
+    [MGWU setReminderMessage:@"Come back and play Thrifter!"];
+    
+    [MGWU dark];
+    
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support
     configPath = [configPath stringByAppendingPathComponent:@"configCocos2d.plist"];
@@ -55,6 +64,23 @@
     [self setupCocos2dWithOptions:cocos2dSetup];
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)tokenId {
+    [MGWU registerForPush:tokenId];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [MGWU gotPush:userInfo];
+}
+
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
+    [MGWU failedPush:error];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [MGWU gotLocalPush:notification];
 }
 
 - (CCScene*) startScene

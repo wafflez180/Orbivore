@@ -7,6 +7,7 @@
 //
 
 #import "CCNode.h"
+#import "ABGameKitHelper.h"
 #include <iAd/iAd.h>
 
 @interface MainScene : CCNode <CCPhysicsCollisionDelegate, ADBannerViewDelegate>

@@ -10,6 +10,7 @@
 #import "circleBlue.h"
 #import "circleGreen.h"
 #import "circleOrange.h"
+#import "ABGameKitHelper.h"
 #include <iAd/iAd.h>
 
 @implementation MainScene{
@@ -24,9 +25,9 @@
     int score;
     CCLabelTTF *scoreLabel;
     BOOL paused;
-    BOOL firsttime;
     BOOL showedonecircle;
     BOOL lostgame;
+    BOOL tutorial;
     CCNodeColor *mainNodePopup;
     CCButton *startGameButton;
     CCSprite *circlesymbol;
@@ -38,14 +39,36 @@
     CCLabelTTF *tutorialLabel;
     CCLabelTTF *YourReady;
     CCNode *tutorialNode;
-    CCButton *tryAgain;
     CCLabelTTF *bestscoreLabel;
     CCLabelTTF *highscoreLabel;
     int highscore;
     ADBannerView *_bannerView;
+    CCButton *leaderboardsButton;
+    CCButton *optionsButton;
+    CCNode *highscoreContainer;
+    CCNode *bestscoreContainer;
+    CCSprite *leaderboardnumbers;
 }
 
 -(void)didLoadFromCCB{
+    
+    NSString *rank = @"0";
+    NSDate *lastRead    = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:rank];
+    if (lastRead == nil)     // App first run: set up user defaults.
+    {
+        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], rank, nil];
+        
+        // do any other initialization you want to do here - e.g. the starting default values.
+        // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"should_play_sounds"];
+        
+        [MGWU setObject:[NSNumber numberWithInt:0] forKey:@"bestscore"];
+        [MGWU setObject:[NSNumber numberWithBool:YES] forKey:@"tutorial"];
+        
+        // sync the defaults to disk
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:rank];
     
     paused = TRUE;
     self.userInteractionEnabled = TRUE;
@@ -58,16 +81,15 @@
     
     score = 0;
     
+    tutorial = FALSE;
     lostgame = FALSE;
-    tryAgain.enabled = FALSE;
-    tryAgain.visible = FALSE;
     
-    firsttime = TRUE;
+    NSNumber *tempint = [MGWU objectForKey:@"bestscore"];
     
     highscore = 0;
     
     bestscoreLabel.visible = TRUE;
-    bestscoreLabel.string = [NSString stringWithFormat:@"BEST: %i", highscore];
+    bestscoreLabel.string = [NSString stringWithFormat:@"%@", tempint];
     
     highscoreLabel.visible = FALSE;
     
@@ -80,12 +102,31 @@
     pressHoldGesture.visible = FALSE;
     tutorialLabel.visible = FALSE;
     
+    [ABGameKitHelper sharedHelper];
+    
+    highscoreContainer.visible = false;
+    bestscoreContainer.position = ccp(0.50, bestscoreContainer.position.y);
+    }
+
+-(void)optionsPressed{
+    CCScene *options = [CCBReader loadAsScene:@"options"];
+    [[CCDirector sharedDirector]replaceScene:options];
+}
+
+-(void)leaderboardsPressed{
+    [[ABGameKitHelper sharedHelper] showLeaderboard:@"01"];
 }
 
 -(void)update:(CCTime)delta{
     
+    if (circlesymbol.opacity == 0) {
+        scoreLabel.visible = TRUE;
+    }else{
+        scoreLabel.visible = FALSE;
+    }
+    
     if ( paused != TRUE) {
-        if (score < 10) {
+        if (score < 10 && score >= 0) {
             
             physicsNode.physicsNode.gravity = ccp(-200, 0);
             self.spawnRate = 1;
@@ -108,13 +149,12 @@
             self.spawnRate = 0.5;
         }
     }
-    if (paused && startGameButton.enabled) {
-        [circlesHolder removeAllChildren];
-    }
-    
+
     scoreLabel.string = [NSString stringWithFormat:@"%i", score];
     
-    if (firsttime == TRUE && startGameButton.enabled == FALSE) {
+    BOOL tutorialbool = [[MGWU objectForKey:@"tutorial"] boolValue];
+    
+    if (tutorialbool == TRUE && startGameButton.enabled == FALSE) {
         
         tutorialLabel.visible = TRUE;
     }else{
@@ -126,44 +166,59 @@
     }else{
         YourReady.visible = TRUE;
     }
-    
-    if (paused) {
-        physicsNode.userInteractionEnabled = FALSE;
-        physicsNode.physicsNode.gravity = ccp(0,0);
-    }else{
-        physicsNode.userInteractionEnabled = TRUE;
-    }
-    
 }
 
 -(void)startgame{
     
     score = 0;
     
-    if (firsttime != TRUE) {
+    self.spawnRate = 1;
+    
+    [circlesHolder removeAllChildren];
+    
+    BOOL tutorialbool = [[MGWU objectForKey:@"tutorial"] boolValue];
+    
+    float fadeouttime = 0.5;
+    
+    for(int i = 0; mainNodePopup.children.count > i; i++){
+        
+        [mainNodePopup.children[i] runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+        
+    }
+    for(int i = 0; bestscoreContainer.children.count > i; i++){
+        
+        [bestscoreContainer.children[i] runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+        
+    }
+    for(int i = 0; highscoreContainer.children.count > i; i++){
+        
+        [highscoreContainer.children[i] runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+        
+    }
+    [optionsButton setCascadeOpacityEnabled:YES];
+    [leaderboardsButton setCascadeOpacityEnabled:YES];
+    [startGameButton setCascadeOpacityEnabled:YES];
+    
+    [optionsButton runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+    [leaderboardsButton runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+    [leaderboardnumbers runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+    [startGameButton runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+    
+    if (tutorialbool != TRUE) {
     paused = FALSE;
     startGameButton.enabled = FALSE;
-    startGameButton.visible = FALSE;
-        tryAgain.enabled = FALSE;
-        tryAgain.visible = FALSE;
+        leaderboardsButton.enabled = FALSE;
+        optionsButton.enabled = FALSE;
         
-    [self spawncircles];
-        [bestscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
-        [highscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
-    [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
-    [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
+    [self performSelector:@selector(spawncircles) withObject:nil afterDelay:1];
+
     circlesHolder.userInteractionEnabled = TRUE;
     tutorialNode.visible = FALSE;
 
     }else{
         startGameButton.enabled = FALSE;
-        startGameButton.visible = FALSE;
-        tryAgain.enabled = FALSE;
-        tryAgain.visible = FALSE;
-        [mainNodePopup runAction:[CCActionFadeOut actionWithDuration:1]];
-        [circlesymbol runAction:[CCActionFadeOut actionWithDuration:1]];
-        [bestscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
-        [highscoreLabel runAction:[CCActionFadeOut actionWithDuration:1]];
+        leaderboardsButton.enabled = FALSE;
+        optionsButton.enabled = FALSE;
         
         [self starttutorial];
     }
@@ -173,32 +228,66 @@
     
     if (paused == FALSE) {
         
-    paused = TRUE;
-    
-    if (highscore < score) {
-        highscore = score;
-    }
-    bestscoreLabel.visible = TRUE;
-    bestscoreLabel.string = [NSString stringWithFormat:@"BEST: %i", highscore];
-    highscoreLabel.visible = TRUE;
-    highscoreLabel.string = [NSString stringWithFormat:@"SCORE: %i", score];
-    
-    score = 0;
-    [circlesHolder removeAllChildren];
-    circlesHolder.userInteractionEnabled = FALSE;
-    startGameButton.enabled = TRUE;
-    startGameButton.visible = TRUE;
-    tryAgain.enabled = TRUE;
-    tryAgain.visible = TRUE;
-    lostgame = TRUE;
-    [bestscoreLabel runAction:[CCActionFadeIn actionWithDuration:1]];
-    [highscoreLabel runAction:[CCActionFadeIn actionWithDuration:1]];
-    [mainNodePopup runAction:[CCActionFadeIn actionWithDuration:1]];
-    [circlesymbol runAction:[CCActionFadeIn actionWithDuration:1]];
+        paused = TRUE;
+        
+        if (highscore < score) {
+            highscore = score;
+            
+            [MGWU setObject:[NSNumber numberWithInt:highscore] forKey:@"bestscore"];
+            
+            NSNumber *tempint = [MGWU objectForKey:@"bestscore"];
+            
+            bestscoreLabel.visible = TRUE;
+            bestscoreLabel.string = [NSString stringWithFormat:@"%@", tempint];
+            
+            [[ABGameKitHelper sharedHelper] reportScore:highscore forLeaderboard:@"01"];
+        }
+        highscoreLabel.visible = TRUE;
+        highscoreLabel.string = [NSString stringWithFormat:@"%i", score];
+        
+        bestscoreContainer.position = ccp(0.25, bestscoreContainer.position.y);
+        highscoreContainer.visible = TRUE;
+        score = 0;
+        [circlesHolder removeAllChildren];
+        circlesHolder.userInteractionEnabled = FALSE;
+        startGameButton.enabled = TRUE;
+        startGameButton.visible = TRUE;
+        leaderboardsButton.enabled = TRUE;
+        leaderboardsButton.visible = TRUE;
+        optionsButton.enabled = TRUE;
+        optionsButton.visible = TRUE;
+        lostgame = TRUE;
+        float fadeintime = 0.5;
+        
+        for(int i = 0; mainNodePopup.children.count > i; i++){
+            
+            [mainNodePopup.children[i] runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+            
+        }
+        for(int i = 0; bestscoreContainer.children.count > i; i++){
+            
+            [bestscoreContainer.children[i] runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+            
+        }
+        for(int i = 0; highscoreContainer.children.count > i; i++){
+            
+            [highscoreContainer.children[i] runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+            
+        }
+        [optionsButton setCascadeOpacityEnabled:YES];
+        [leaderboardsButton setCascadeOpacityEnabled:YES];
+        [startGameButton setCascadeOpacityEnabled:YES];
+        
+        [optionsButton runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+        [leaderboardsButton runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+        [leaderboardnumbers runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+        [startGameButton runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
     }
 }
 
 -(void)starttutorial{
+    
+    tutorial = TRUE;
     
     tutorialNode.visible = TRUE;
     
@@ -315,7 +404,8 @@
         nothingtapGesture.positionInPoints = ccp(200.0, 15);
         
         paused = FALSE;
-        
+        tutorial = FALSE;
+
         thumbUpGesture.opacity = 1;
         
         thumbUpGesture.visible = TRUE;
@@ -335,8 +425,8 @@
         [thumbUpGesture runAction:sequence];
         
         [self performSelector:@selector(spawncircles) withObject:nil afterDelay:4];
-    
-        firsttime = FALSE;
+        
+        [MGWU setObject:[NSNumber numberWithBool:NO] forKey:@"tutorial"];
         
     }else if(showedonecircle != TRUE){
     showedonecircle = TRUE;
