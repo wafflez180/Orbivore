@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>12</integer>
+	<integer>14</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -412,7 +412,8 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Artist: Person</string>
+									<string>Other apps:
+Hacker Outbreak</string>
 									<false/>
 								</array>
 							</dict>
@@ -548,8 +549,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -992,7 +991,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>PLAY TUTORIAL</string>
+									<string>TUTORIAL</string>
 									<false/>
 								</array>
 							</dict>
@@ -1202,6 +1201,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1260,8 +1261,8 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2</real>
-									<real>2</real>
+									<real>1.25</real>
+									<real>1.25</real>
 									<true/>
 									<integer>0</integer>
 								</array>
@@ -1273,7 +1274,7 @@
 								<string>Block</string>
 								<key>value</key>
 								<array>
-									<string></string>
+									<string>facebookPressed</string>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -1284,10 +1285,10 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>33</real>
-									<real>33</real>
-									<integer>0</integer>
-									<integer>0</integer>
+									<real>0.23125000298023224</real>
+									<real>0.13028168678283691</real>
+									<integer>2</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1297,10 +1298,10 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>33</real>
-									<real>33</real>
-									<integer>0</integer>
-									<integer>0</integer>
+									<real>0.9375</real>
+									<real>0.52816903591156006</real>
+									<integer>2</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1318,7 +1319,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string></string>
+									<string>f</string>
 									<false/>
 								</array>
 							</dict>
@@ -1330,7 +1331,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>facebookicon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Normal</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.26666668057441711</real>
+									<real>0.38431376218795776</real>
+									<real>0.69803923368453979</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1341,7 +1355,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>facebookicon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Highlighted</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.40000000596046448</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1365,7 +1392,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>facebookicon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Disabled</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.40000000596046448</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1384,7 +1424,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>facebookicon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Selected</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.40000000596046448</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1401,7 +1454,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Arial-BoldMT</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1410,7 +1463,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>17</real>
+									<real>50</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1437,7 +1490,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>10</real>
+									<real>0.0</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1485,7 +1538,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
+									<real>0.0</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1509,7 +1562,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>2</real>
+									<real>0.0</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1586,8 +1639,8 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2</real>
-									<real>2</real>
+									<real>1.25</real>
+									<real>1.25</real>
 									<true/>
 									<integer>0</integer>
 								</array>
@@ -1599,7 +1652,7 @@
 								<string>Block</string>
 								<key>value</key>
 								<array>
-									<string></string>
+									<string>twitterPressed</string>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -1610,10 +1663,10 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>33</real>
-									<real>33</real>
-									<integer>0</integer>
-									<integer>0</integer>
+									<real>0.23125000298023224</real>
+									<real>0.13028168678283691</real>
+									<integer>2</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1623,10 +1676,10 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>33</real>
-									<real>33</real>
-									<integer>0</integer>
-									<integer>0</integer>
+									<real>0.9375</real>
+									<real>0.52816903591156006</real>
+									<integer>2</integer>
+									<integer>2</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1644,7 +1697,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string></string>
+									<string>t</string>
 									<false/>
 								</array>
 							</dict>
@@ -1656,7 +1709,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>twittericon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Normal</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.60000002384185791</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1667,7 +1733,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>twittericon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Highlighted</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.60000002384185791</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1691,7 +1770,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>twittericon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Disabled</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.60000002384185791</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1710,7 +1802,20 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>twittericon.png</string>
+									<string>Circle3Fake.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundColor|Selected</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.20000000298023224</real>
+									<real>0.60000002384185791</real>
+									<real>0.80000001192092896</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1727,7 +1832,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Arial-BoldMT</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1736,7 +1841,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>17</real>
+									<real>50</real>
 									<integer>0</integer>
 								</array>
 							</dict>

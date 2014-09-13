@@ -21,7 +21,7 @@
 	<key>engine</key>
 	<integer>0</integer>
 	<key>excludedFromPackageMigration</key>
-	<false/>
+	<true/>
 	<key>exporter</key>
 	<string>ccbi</string>
 	<key>fileType</key>
@@ -113,20 +113,50 @@
 			<key>scaleFrom</key>
 			<integer>2</integer>
 		</dict>
+		<key>Assets/birdblue.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Assets/birdblueclosed.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Assets/birdgreen.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Assets/birdgreenclosed.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Assets/birdorange.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>Assets/birdorangeclosed.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
 		<key>Circle1Fake.png</key>
 		<dict>
 			<key>scaleFrom</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Circle2Fake.png</key>
 		<dict>
 			<key>scaleFrom</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Circle3Fake.png</key>
 		<dict>
 			<key>scaleFrom</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Platformer-Pixel164@4x.png</key>
 		<dict>
@@ -229,8 +259,8 @@
 		</dict>
 	</dict>
 	<key>versionStr</key>
-	<string>Version: 1.2.0
-GitHub: 603331c974
+	<string>Version: 1.2.1
+GitHub: dde98b0763
 </string>
 </dict>
 </plist>

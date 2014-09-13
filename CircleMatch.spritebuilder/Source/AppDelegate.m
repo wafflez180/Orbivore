@@ -37,7 +37,7 @@
     
     [MGWU setAppiraterAppId:@"914284583" andAppName:@"Thrifter"];
     
-    [MGWU setReminderMessage:@"Come back and play Thrifter!"];
+    [MGWU setReminderMessage:@"Come back and play Orbivore!"];
     
     [MGWU dark];
     

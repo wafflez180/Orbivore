@@ -41,13 +41,16 @@
     CCNode *tutorialNode;
     CCLabelTTF *bestscoreLabel;
     CCLabelTTF *highscoreLabel;
-    int highscore;
     ADBannerView *_bannerView;
     CCButton *leaderboardsButton;
     CCButton *optionsButton;
     CCNode *highscoreContainer;
     CCNode *bestscoreContainer;
     CCSprite *leaderboardnumbers;
+    CCNodeColor *scoresContainer;
+    CCLabelTTF *firstLoginLabel;
+    int howmanytimeslost;
+    CCNodeColor *firstLoginContainer;
 }
 
 -(void)didLoadFromCCB{
@@ -80,18 +83,20 @@
     physicsNode.collisionDelegate = self;
     
     score = 0;
+    howmanytimeslost = 0;
     
     tutorial = FALSE;
     lostgame = FALSE;
     
     NSNumber *tempint = [MGWU objectForKey:@"bestscore"];
     
-    highscore = 0;
-    
     bestscoreLabel.visible = TRUE;
     bestscoreLabel.string = [NSString stringWithFormat:@"%@", tempint];
     
     highscoreLabel.visible = FALSE;
+    scoresContainer.visible = FALSE;
+    bestscoreContainer.visible = FALSE;
+    bestscoreLabel.visible = FALSE;
     
     thumbUpGesture.opacity = 0;
     
@@ -169,7 +174,7 @@
 }
 
 -(void)startgame{
-    
+        
     score = 0;
     
     self.spawnRate = 1;
@@ -204,6 +209,17 @@
     [leaderboardnumbers runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
     [startGameButton runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
     
+    if (howmanytimeslost >= 1) {
+        firstLoginLabel.visible = FALSE;
+        firstLoginContainer.visible = FALSE;
+    }else{
+        [firstLoginLabel runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+        [firstLoginContainer runAction:[CCActionFadeOut actionWithDuration:fadeouttime]];
+    }
+    
+    [scoresContainer runAction:[CCActionFadeTo actionWithDuration:fadeouttime opacity:0.0]];
+
+    
     if (tutorialbool != TRUE) {
     paused = FALSE;
     startGameButton.enabled = FALSE;
@@ -228,10 +244,20 @@
     
     if (paused == FALSE) {
         
+        howmanytimeslost++;
+        
         paused = TRUE;
+        
+        NSNumber *thehighscore = [MGWU objectForKey:@"bestscore"];
+        
+        int highscore = [thehighscore intValue];
+        
+        NSLog(@"Score: %i", score);
         
         if (highscore < score) {
             highscore = score;
+            
+            NSLog(@"New Highscore: %i", highscore);
             
             [MGWU setObject:[NSNumber numberWithInt:highscore] forKey:@"bestscore"];
             
@@ -243,9 +269,11 @@
             [[ABGameKitHelper sharedHelper] reportScore:highscore forLeaderboard:@"01"];
         }
         highscoreLabel.visible = TRUE;
+        bestscoreContainer.visible = TRUE;
+        bestscoreLabel.visible = TRUE;
+        scoresContainer.visible = TRUE;
         highscoreLabel.string = [NSString stringWithFormat:@"%i", score];
         
-        bestscoreContainer.position = ccp(0.25, bestscoreContainer.position.y);
         highscoreContainer.visible = TRUE;
         score = 0;
         [circlesHolder removeAllChildren];
@@ -282,6 +310,9 @@
         [leaderboardsButton runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
         [leaderboardnumbers runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
         [startGameButton runAction:[CCActionFadeIn actionWithDuration:fadeintime]];
+        
+        [scoresContainer runAction:[CCActionFadeTo actionWithDuration:fadeintime opacity:1]];
+        
     }
 }
 
@@ -510,12 +541,55 @@
         // make the particle effect clean itself up, once it is completed
         explosion.autoRemoveOnFinish = TRUE;
         // place the particle effect on the seals position
-        explosion.position = fake.position;
+        explosion.position= fake.position;
+    
+        explosion.positionInPoints = ccp(explosion.positionInPoints.x, explosion.positionInPoints.y + (fake.positionInPoints.y / 15));
+    
         // add the particle effect to the same node the seal is on
+        explosion.zOrder = 500;
+    
         [fake.parent addChild:explosion];
         
         // finally, remove the destroyed seal
         [fake removeFromParent];
+}
+-(void)removefakenoexp:(CCSprite *)fake{
+    [fake removeFromParent];
+}
+-(void)addclosed: (NSString *)closedPic{
+    if ([closedPic isEqualToString:@"Blue"]) {
+        CCSprite *theclosedpic = [CCSprite spriteWithImageNamed:@"Assets/birdblueclosed.png"];
+        
+        [physicsNode addChild:theclosedpic];
+        
+        theclosedpic.position = goalBlue.positionInPoints;
+        
+        theclosedpic.scale = 0.80f;
+        
+        [self performSelector:@selector(removefakenoexp:) withObject:theclosedpic afterDelay:.30];
+    }
+    if ([closedPic isEqualToString:@"Green"]) {
+        CCSprite *theclosedpic = [CCSprite spriteWithImageNamed:@"Assets/birdgreenclosed.png"];
+        
+        [physicsNode addChild:theclosedpic];
+        
+        theclosedpic.position = goalGreen.positionInPoints;
+        
+        theclosedpic.scale = 0.80f;
+        
+        [self performSelector:@selector(removefakenoexp:) withObject:theclosedpic afterDelay:.30];
+    }
+    if ([closedPic isEqualToString:@"Orange"]) {
+        CCSprite *theclosedpic = [CCSprite spriteWithImageNamed:@"Assets/birdorangeclosed.png"];
+        
+        [physicsNode addChild:theclosedpic];
+        
+        theclosedpic.position = goalOrange.positionInPoints;
+        
+        theclosedpic.scale = 0.80f;
+        
+        [self performSelector:@selector(removefakenoexp:) withObject:theclosedpic afterDelay:.30];
+    }
 }
 
 // COLLISIONS WITH BLUE CIRCLE
@@ -531,10 +605,15 @@
     currentfake.scale = 2;
     [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:goalBlue.positionInPoints]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalBlue.positionInPoints.x, goalBlue.positionInPoints.y - (goalBlue.contentSizeInPoints.height / 4.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];
+    
+    NSString *addclosed = @"Blue";
+    
+    [self performSelector:@selector(addclosed:) withObject:addclosed afterDelay:.20];
+
     
     touchedCircleBlue.userInteractionEnabled = FALSE;
     
@@ -570,10 +649,14 @@
     currentfake.scale = 2;
     [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:goalGreen.positionInPoints]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalGreen.positionInPoints.x, goalGreen.positionInPoints.y - (goalGreen.contentSizeInPoints.height / 4.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];
+    
+    NSString *addclosed = @"Green";
+    
+    [self performSelector:@selector(addclosed:) withObject:addclosed afterDelay:.20];
     
     touchedCircleGreen.userInteractionEnabled = FALSE;
     
@@ -609,10 +692,14 @@
     currentfake.scale = 2;
     [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:goalOrange.positionInPoints]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalOrange.positionInPoints.x, goalOrange.positionInPoints.y - (goalOrange.contentSizeInPoints.height / 4.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];
+    
+    NSString *addclosed = @"Orange";
+    
+    [self performSelector:@selector(addclosed:) withObject:addclosed afterDelay:.20];
     
     touchedCircleOrange.userInteractionEnabled = FALSE;
     

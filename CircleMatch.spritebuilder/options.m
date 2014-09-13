@@ -28,4 +28,11 @@
     [[CCDirector sharedDirector]replaceScene:Mainscene];
 }
 
+-(void)twitterPressed{
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://twitter.com/orbivore"]];
+}
+
+-(void)facebookPressed{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.facebook.com/pages/Orbivore-Community/427042634113900"]];
+}
 @end
