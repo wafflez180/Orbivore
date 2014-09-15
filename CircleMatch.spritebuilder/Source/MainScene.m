@@ -1,9 +1,9 @@
 //
 //  MainScene.m
-//  PROJECTNAME
+//  CircleMatch
 //
-//  Created by Viktor on 10/10/13.
-//  Copyright (c) 2013 Apportable. All rights reserved.
+//  Created by Arthur Araujo
+//
 //
 
 #import "MainScene.h"
@@ -37,6 +37,7 @@
     CCSprite *nothingtapGesture;
     CCSprite *thumbUpGesture;
     CCLabelTTF *tutorialLabel;
+    CCLabelTTF *tutorialLabel2;
     CCLabelTTF *YourReady;
     CCNode *tutorialNode;
     CCLabelTTF *bestscoreLabel;
@@ -51,6 +52,7 @@
     CCLabelTTF *firstLoginLabel;
     int howmanytimeslost;
     CCNodeColor *firstLoginContainer;
+    bool spawning;
 }
 
 -(void)didLoadFromCCB{
@@ -106,6 +108,9 @@
     singleTapGesture.visible = FALSE;
     pressHoldGesture.visible = FALSE;
     tutorialLabel.visible = FALSE;
+    tutorialLabel2.visible = FALSE;
+    
+    spawning = FALSE;
     
     [ABGameKitHelper sharedHelper];
     
@@ -119,6 +124,7 @@
 }
 
 -(void)leaderboardsPressed{
+    
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"01"];
 }
 
@@ -162,8 +168,10 @@
     if (tutorialbool == TRUE && startGameButton.enabled == FALSE) {
         
         tutorialLabel.visible = TRUE;
+        tutorialLabel2.visible = TRUE;
     }else{
         tutorialLabel.visible = FALSE;
+        tutorialLabel2.visible = FALSE;
     }
     
     if (thumbUpGesture.opacity == 0) {
@@ -226,7 +234,7 @@
         leaderboardsButton.enabled = FALSE;
         optionsButton.enabled = FALSE;
         
-    [self performSelector:@selector(spawncircles) withObject:nil afterDelay:1];
+    [self performSelector:@selector(startthespawning) withObject:nil afterDelay:1];
 
     circlesHolder.userInteractionEnabled = TRUE;
     tutorialNode.visible = FALSE;
@@ -268,6 +276,7 @@
             
             [[ABGameKitHelper sharedHelper] reportScore:highscore forLeaderboard:@"01"];
         }
+        spawning = FALSE;
         highscoreLabel.visible = TRUE;
         bestscoreContainer.visible = TRUE;
         bestscoreLabel.visible = TRUE;
@@ -323,6 +332,7 @@
     tutorialNode.visible = TRUE;
     
     tutorialLabel.visible = TRUE;
+    tutorialLabel2.visible = TRUE;
     
     tutorialLabel.string = @"Tutorial";
     
@@ -437,7 +447,7 @@
         paused = FALSE;
         tutorial = FALSE;
 
-        thumbUpGesture.opacity = 1;
+        thumbUpGesture.opacity = 0.01;
         
         thumbUpGesture.visible = TRUE;
         
@@ -447,7 +457,7 @@
         
         id reposition = [CCActionMoveTo actionWithDuration:.25 position:ccp(0.5, 0.5)];
         
-        id fadeout = [CCActionFadeOut actionWithDuration:1.5];
+        id fadeout = [CCActionFadeTo actionWithDuration:1.5 opacity:0];
         
         id sequence = [CCActionSequence actions:bouncein,reposition, fadeout,nil];
 
@@ -455,7 +465,7 @@
         
         [thumbUpGesture runAction:sequence];
         
-        [self performSelector:@selector(spawncircles) withObject:nil afterDelay:4];
+        [self performSelector:@selector(startthespawning) withObject:nil afterDelay:4];
         
         [MGWU setObject:[NSNumber numberWithBool:NO] forKey:@"tutorial"];
         
@@ -465,9 +475,16 @@
     }
 }
 
+-(void)startthespawning{
+    if (!spawning) {
+        spawning = TRUE;
+        [self performSelector:@selector(spawncircles) withObject:nil afterDelay:0];
+    }
+}
+
 -(void)spawncircles{
     
-    if (paused != TRUE) {
+    if (paused != TRUE && spawning) {
     
     float randomspawntime = arc4random() % 4;
     
@@ -596,16 +613,16 @@
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleBlue:(CCSprite *)touchedCircleBlue shotAtBlue:(CCSprite *)shotAtBlue {
     
-    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle3Fake.png"];
+    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Assets/Circle3Fake.png"];
     
     [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleBlue.position;
     
     currentfake.scale = 2;
-    [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
+    [currentfake runAction:[CCActionScaleTo actionWithDuration:.10 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalBlue.positionInPoints.x, goalBlue.positionInPoints.y - (goalBlue.contentSizeInPoints.height / 4.5))]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalBlue.positionInPoints.x, goalBlue.positionInPoints.y - (goalBlue.contentSizeInPoints.height / 5.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];
@@ -640,16 +657,16 @@
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleGreen:(CCSprite *)touchedCircleGreen shotAtGreen:(CCSprite *)shotAtGreen {
     
-    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle2Fake.png"];
+    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Assets/Circle2Fake.png"];
     
     [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleGreen.position;
     
     currentfake.scale = 2;
-    [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
+    [currentfake runAction:[CCActionScaleTo actionWithDuration:.10 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalGreen.positionInPoints.x, goalGreen.positionInPoints.y - (goalGreen.contentSizeInPoints.height / 4.5))]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalGreen.positionInPoints.x, goalGreen.positionInPoints.y - (goalGreen.contentSizeInPoints.height / 5.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];
@@ -683,16 +700,16 @@
 }
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair touchedCircleOrange:(CCSprite *)touchedCircleOrange shotAtOrange:(CCSprite *)shotAtOrange {
     
-    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Circle1Fake.png"];
+    CCSprite *currentfake = [CCSprite spriteWithImageNamed:@"Assets/Circle1Fake.png"];
     
     [circlesHolder addChild:currentfake];
     
     currentfake.position = touchedCircleOrange.position;
     
     currentfake.scale = 2;
-    [currentfake runAction:[CCActionScaleTo actionWithDuration:.20 scale:.5]];
+    [currentfake runAction:[CCActionScaleTo actionWithDuration:.10 scale:.5]];
     
-    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalOrange.positionInPoints.x, goalOrange.positionInPoints.y - (goalOrange.contentSizeInPoints.height / 4.5))]];
+    [currentfake runAction:[CCActionMoveTo actionWithDuration:.20 position:ccp(goalOrange.positionInPoints.x, goalOrange.positionInPoints.y - (goalOrange.contentSizeInPoints.height / 5.5))]];
     [currentfake runAction:[CCActionRotateBy actionWithDuration:.20 angle:10080]];
     
     [self performSelector:@selector(removefake:) withObject:currentfake afterDelay:.20];

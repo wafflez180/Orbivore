@@ -43,7 +43,7 @@
 	<key>publishEnablediPhone</key>
 	<true/>
 	<key>publishEnvironment</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>publishResolution_android_phone</key>
 	<true/>
 	<key>publishResolution_android_phonehd</key>
@@ -88,15 +88,30 @@
 			<key>scaleFrom</key>
 			<integer>2</integer>
 		</dict>
+		<key>Assets/Circle1Fake.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
 		<key>Assets/Circle2.png</key>
 		<dict>
 			<key>scaleFrom</key>
 			<integer>2</integer>
 		</dict>
+		<key>Assets/Circle2Fake.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
 		<key>Assets/Circle3.png</key>
 		<dict>
 			<key>scaleFrom</key>
 			<integer>2</integer>
+		</dict>
+		<key>Assets/Circle3Fake.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
 		</dict>
 		<key>Assets/CircleGoal1.png</key>
 		<dict>
@@ -112,6 +127,11 @@
 		<dict>
 			<key>scaleFrom</key>
 			<integer>2</integer>
+		</dict>
+		<key>Assets/Thumb-up.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
 		</dict>
 		<key>Assets/birdblue.png</key>
 		<dict>
@@ -143,35 +163,12 @@
 			<key>scaleFrom</key>
 			<integer>4</integer>
 		</dict>
-		<key>Circle1Fake.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
-		</dict>
-		<key>Circle2Fake.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
-		</dict>
-		<key>Circle3Fake.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
-		</dict>
-		<key>Platformer-Pixel164@4x.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
-		</dict>
-		<key>Platformer-Pixel166@4x.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
-		</dict>
 		<key>Sprites</key>
 		<dict/>
 		<key>ccbResources</key>
 		<dict>
+			<key>isSmartSpriteSheet</key>
+			<true/>
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
@@ -251,11 +248,6 @@
 			<integer>2</integer>
 			<key>tabletScale</key>
 			<integer>1</integer>
-		</dict>
-		<key>panel_brown@4x.png</key>
-		<dict>
-			<key>scaleFrom</key>
-			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>versionStr</key>

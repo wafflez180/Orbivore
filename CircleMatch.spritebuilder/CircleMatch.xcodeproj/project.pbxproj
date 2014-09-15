@@ -90,6 +90,8 @@
 		A76448A119B0ECCE0049FD51 /* send-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = A764485B19B0ECCE0049FD51 /* send-button-inactive.png */; };
 		A76448A219B0ECCE0049FD51 /* send-button-instate.png in Resources */ = {isa = PBXBuildFile; fileRef = A764485C19B0ECCE0049FD51 /* send-button-instate.png */; };
 		A76448A319B0ECCE0049FD51 /* send-field-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = A764485D19B0ECCE0049FD51 /* send-field-landscape.png */; };
+		A797F00619C4F23600513C57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A797F00519C4F23600513C57 /* Images.xcassets */; };
+		A7AF751319C5EC2400D40A7F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AF751219C5EC2400D40A7F /* Crashlytics.framework */; };
 		A7B1149419C4C8A00053E245 /* birdgreenblink.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B1149319C4C8A00053E245 /* birdgreenblink.m */; };
 		A7B1149819C4C8AF0053E245 /* birdblueblink.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B1149719C4C8AF0053E245 /* birdblueblink.m */; };
 		A7B1149B19C4C8BD0053E245 /* birdorangeblink.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B1149A19C4C8BD0053E245 /* birdorangeblink.m */; };
@@ -233,6 +235,8 @@
 		A764485B19B0ECCE0049FD51 /* send-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button-inactive.png"; sourceTree = "<group>"; };
 		A764485C19B0ECCE0049FD51 /* send-button-instate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button-instate.png"; sourceTree = "<group>"; };
 		A764485D19B0ECCE0049FD51 /* send-field-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-field-landscape.png"; sourceTree = "<group>"; };
+		A797F00519C4F23600513C57 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CircleMatch/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		A7AF751219C5EC2400D40A7F /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A7B1149219C4C8A00053E245 /* birdgreenblink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = birdgreenblink.h; sourceTree = "<group>"; };
 		A7B1149319C4C8A00053E245 /* birdgreenblink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = birdgreenblink.m; sourceTree = "<group>"; };
 		A7B1149619C4C8AF0053E245 /* birdblueblink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = birdblueblink.h; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 				A764480F19B0EC440049FD51 /* Social.framework in Frameworks */,
 				A764480D19B0EC390049FD51 /* MessageUI.framework in Frameworks */,
 				A764480B19B0EC330049FD51 /* libz.dylib in Frameworks */,
+				A7AF751319C5EC2400D40A7F /* Crashlytics.framework in Frameworks */,
 				A70020E719AE7B57004E47ED /* AdSupport.framework in Frameworks */,
 				A70020E519AE7B4C004E47ED /* iAd.framework in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
@@ -486,6 +491,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7AF751219C5EC2400D40A7F /* Crashlytics.framework */,
 				A7D5157919B239E400865D94 /* Security.framework */,
 				A7D5157719B239DE00865D94 /* CFNetwork.framework */,
 				A7D5156B19B2358600865D94 /* GameKit.framework */,
@@ -516,6 +522,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A797F00519C4F23600513C57 /* Images.xcassets */,
 				B73789911807667A0076A88C /* Icons */,
 				B737893A180761570076A88C /* Published-iOS */,
 			);
@@ -543,6 +550,7 @@
 				B77F1B2A17B978D7009739AE /* Sources */,
 				B77F1B2B17B978D7009739AE /* Frameworks */,
 				B77F1B2C17B978D7009739AE /* Resources */,
+				A7AF751119C5EBF300D40A7F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -622,6 +630,7 @@
 				A764487819B0ECCE0049FD51 /* MGWUAboutFooter-Landscape@2x~iphone.png in Resources */,
 				A76448A219B0ECCE0049FD51 /* send-button-instate.png in Resources */,
 				A764489819B0ECCE0049FD51 /* mgwuLogoDark@2x.png in Resources */,
+				A797F00619C4F23600513C57 /* Images.xcassets in Resources */,
 				A764489F19B0ECCE0049FD51 /* operator.unavailable.png in Resources */,
 				A764489719B0ECCE0049FD51 /* mgwuLogoDark.png in Resources */,
 				A764487F19B0ECCE0049FD51 /* MGWUBackground-Landscape@2x~ipad.png in Resources */,
@@ -701,6 +710,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A7AF751119C5EBF300D40A7F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run b3f968f6cdf4372d174aad54e4647514c1888e83 4ba1323699a831aab1d8745099d061dc1228dc735dcafba8b6beb8149b38464d";
+		};
 		D2E0167A18D782EC00927430 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,7 +778,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -771,7 +794,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -800,7 +823,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -810,14 +833,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = CircleMatch.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mgwuSDK.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -831,7 +857,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -839,7 +865,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CircleMatch;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f4180aa-b868-48de-bc73-d4d169ceb0f2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -848,14 +874,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = CircleMatch.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mgwuSDK.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -868,14 +897,14 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = CircleMatch;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1f4180aa-b868-48de-bc73-d4d169ceb0f2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

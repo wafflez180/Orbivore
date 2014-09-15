@@ -1,9 +1,9 @@
 //
-//  MainScene.h
-//  PROJECTNAME
+//  MainScene.m
+//  CircleMatch
 //
-//  Created by Viktor on 10/10/13.
-//  Copyright (c) 2013 Apportable. All rights reserved.
+//  Created by Arthur Araujo
+//
 //
 
 #import "CCNode.h"

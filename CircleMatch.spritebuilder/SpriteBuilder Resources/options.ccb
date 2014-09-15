@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>14</integer>
+	<integer>16</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -117,7 +117,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>circlematchsymbol.png</string>
+									<string>Assets/circlematchsymbol.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -215,7 +215,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>fonts/AldotheApache.ttf</string>
+								<string>fonts/Rajdhani-Bold.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -224,7 +224,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>26</real>
+									<real>24</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -243,7 +243,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>0.85000002384185791</real>
+									<real>0.89999997615814209</real>
 									<real>0.20000000298023224</real>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -412,8 +412,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Other apps:
-Hacker Outbreak</string>
+									<string>Other apps:</string>
 									<false/>
 								</array>
 							</dict>
@@ -423,7 +422,7 @@ Hacker Outbreak</string>
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>fonts/AldotheApache.ttf</string>
+								<string>fonts/Rajdhani-Bold.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -432,7 +431,214 @@ Hacker Outbreak</string>
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>26</real>
+									<real>24</real>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>adjustsFontSizeToFit</string>
+								<key>type</key>
+								<string>Check</string>
+								<key>value</key>
+								<true/>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>dimensions</string>
+								<key>type</key>
+								<string>Size</string>
+								<key>value</key>
+								<array>
+									<real>0.85000002384185791</real>
+									<real>0.20000000298023224</real>
+									<integer>2</integer>
+									<integer>2</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>horizontalAlignment</string>
+								<key>type</key>
+								<string>IntegerLabeled</string>
+								<key>value</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>verticalAlignment</string>
+								<key>type</key>
+								<string>IntegerLabeled</string>
+								<key>value</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>fontColor</string>
+								<key>type</key>
+								<string>Color4</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>outlineColor</string>
+								<key>type</key>
+								<string>Color4</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
+									<real>0.0</real>
+									<real>0.0</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>outlineWidth</string>
+								<key>type</key>
+								<string>FloatScale</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>shadowColor</string>
+								<key>type</key>
+								<string>Color4</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
+									<real>0.0</real>
+									<real>0.0</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>shadowBlurRadius</string>
+								<key>type</key>
+								<string>FloatScale</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>shadowOffset</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>UUID</key>
+						<integer>15</integer>
+						<key>baseClass</key>
+						<string>CCLabelTTF</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>displayName</key>
+						<string>CCLabelTTF</string>
+						<key>memberVarAssignmentName</key>
+						<string></string>
+						<key>memberVarAssignmentType</key>
+						<integer>1</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string></string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>0.5</real>
+									<real>0.25</real>
+									<integer>1</integer>
+									<integer>2</integer>
+									<integer>2</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>anchorPoint</string>
+								<key>type</key>
+								<string>Point</string>
+								<key>value</key>
+								<array>
+									<real>0.5</real>
+									<real>0.5</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>string</string>
+								<key>type</key>
+								<string>Text</string>
+								<key>value</key>
+								<array>
+									<string>Hacker Outbreak</string>
+									<false/>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>fontName</string>
+								<key>type</key>
+								<string>FontTTF</string>
+								<key>value</key>
+								<string>fonts/Rajdhani-Bold.ttf</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>fontSize</string>
+								<key>type</key>
+								<string>FloatScale</string>
+								<key>value</key>
+								<array>
+									<real>24</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -609,7 +815,7 @@ Hacker Outbreak</string>
 								<array>
 									<real>1</real>
 									<real>1</real>
-									<false/>
+									<true/>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -748,7 +954,7 @@ Hacker Outbreak</string>
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>fonts/RussoOne-Regular.ttf</string>
+								<string>fonts/maagkramp.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -757,7 +963,7 @@ Hacker Outbreak</string>
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>25</real>
+									<real>30</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -875,6 +1081,8 @@ Hacker Outbreak</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1074,7 +1282,7 @@ Hacker Outbreak</string>
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>fonts/RussoOne-Regular.ttf</string>
+								<string>fonts/maagkramp.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1083,7 +1291,7 @@ Hacker Outbreak</string>
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>25</real>
+									<real>30</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1201,8 +1409,6 @@ Hacker Outbreak</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1285,10 +1491,10 @@ Hacker Outbreak</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>0.23125000298023224</real>
-									<real>0.13028168678283691</real>
-									<integer>2</integer>
-									<integer>2</integer>
+									<real>74</real>
+									<real>74</real>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1298,10 +1504,10 @@ Hacker Outbreak</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>0.9375</real>
-									<real>0.52816903591156006</real>
-									<integer>2</integer>
-									<integer>2</integer>
+									<real>74</real>
+									<real>74</real>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1331,7 +1537,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1355,7 +1561,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1392,7 +1598,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1424,7 +1630,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1663,10 +1869,10 @@ Hacker Outbreak</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>0.23125000298023224</real>
-									<real>0.13028168678283691</real>
-									<integer>2</integer>
-									<integer>2</integer>
+									<real>74</real>
+									<real>74</real>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1676,10 +1882,10 @@ Hacker Outbreak</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>0.9375</real>
-									<real>0.52816903591156006</real>
-									<integer>2</integer>
-									<integer>2</integer>
+									<real>74</real>
+									<real>74</real>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -1709,7 +1915,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1733,7 +1939,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1770,7 +1976,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1802,7 +2008,7 @@ Hacker Outbreak</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Circle3Fake.png</string>
+									<string>Assets/Circle3Fake.png</string>
 								</array>
 							</dict>
 							<dict>
