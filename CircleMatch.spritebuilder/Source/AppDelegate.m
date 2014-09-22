@@ -27,7 +27,9 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
+#ifndef APPORTABLE
 #import <Crashlytics/Crashlytics.h>
+#endif
 
 @implementation AppController
 
@@ -41,9 +43,9 @@
     [MGWU setReminderMessage:@"Come back and play Orbivore!"];
     
     [MGWU dark];
-    
+#ifndef APPORTABLE
     [Crashlytics startWithAPIKey:@"b3f968f6cdf4372d174aad54e4647514c1888e83"];
-    
+#endif
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support
     configPath = [configPath stringByAppendingPathComponent:@"configCocos2d.plist"];
@@ -75,6 +77,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [MGWU gotPush:userInfo];
+    
 }
 
 

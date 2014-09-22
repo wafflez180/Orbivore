@@ -10,8 +10,12 @@
 #import "circleBlue.h"
 #import "circleGreen.h"
 #import "circleOrange.h"
+#ifndef APPORTABLE
 #import "ABGameKitHelper.h"
 #include <iAd/iAd.h>
+#else
+#import "GADBannerView.h"
+#endif
 
 @implementation MainScene{
     CCSprite *goalBlue;
@@ -42,7 +46,9 @@
     CCNode *tutorialNode;
     CCLabelTTF *bestscoreLabel;
     CCLabelTTF *highscoreLabel;
+#ifndef APPORTABLE
     ADBannerView *_bannerView;
+#endif
     CCButton *leaderboardsButton;
     CCButton *optionsButton;
     CCNode *highscoreContainer;
@@ -112,7 +118,9 @@
     
     spawning = FALSE;
     
+#ifndef APPORTABLE
     [ABGameKitHelper sharedHelper];
+#endif
     
     highscoreContainer.visible = false;
     bestscoreContainer.position = ccp(0.50, bestscoreContainer.position.y);
@@ -124,8 +132,9 @@
 }
 
 -(void)leaderboardsPressed{
-    
+#ifndef APPORTABLE
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"01"];
+#endif
 }
 
 -(void)update:(CCTime)delta{
@@ -274,7 +283,9 @@
             bestscoreLabel.visible = TRUE;
             bestscoreLabel.string = [NSString stringWithFormat:@"%@", tempint];
             
+#ifndef APPORTABLE
             [[ABGameKitHelper sharedHelper] reportScore:highscore forLeaderboard:@"01"];
+#endif
         }
         spawning = FALSE;
         highscoreLabel.visible = TRUE;
@@ -810,6 +821,8 @@
 
 -(id)init
 {
+    
+#ifndef APPORTABLE
     if( (self= [super init]) )
     {
         // On iOS 6 ADBannerView introduces a new initializer, use it when available.
@@ -842,10 +855,50 @@
         _adView.delegate = self;
         
     }
+#else
+    float screenBounds = [UIScreen mainScreen].bounds.size.height;
+    
+    float tempint = screenBounds;
+    
+    ///   Create and setup the ad view, specifying the size and origin at {0, 0}.
+    GADBannerView *GadView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    CGRect gadFrame = GadView.frame;
+    gadFrame.origin.y = tempint - GadView.frame.size.height;
+    gadFrame.origin.x = self.contentSizeInPoints.width / 2;
+    GadView.frame = gadFrame;
+    
+    GadView.delegate = self;
+    GadView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+
+    GadView.adUnitID = @"ca-app-pub-2396206924319009/8591272379";
+    
+    //Request an ad without any additional targeting information.
+    
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for
+    // the simulator as well as any devices you want to receive test ads.
+    
+    // test devivce
+    
+    request.testing = YES;
+    request.testDevices = [NSArray arrayWithObjects:@"07C49734-A38B-4113-A7D3-EDB070B62BCC", nil];
+
+    
+    [GadView loadRequest:request];
+    
+    //Place the ad view onto the screen.
+    [[[CCDirector sharedDirector]view]addSubview:GadView];
+    [_adView setBackgroundColor:[UIColor clearColor]];
+    [[[CCDirector sharedDirector]view]addSubview:GadView];
+#endif
+    
     [self layoutAnimated:YES];
     return self;
 }
 
+#ifndef APPORTABLE
 
 - (void)layoutAnimated:(BOOL)animated
 {
@@ -875,5 +928,8 @@
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
     [self layoutAnimated:YES];
 }
+
+#endif
+
 
 @end

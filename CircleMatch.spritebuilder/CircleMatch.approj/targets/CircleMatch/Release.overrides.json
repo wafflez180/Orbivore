@@ -145,6 +145,7 @@
     //"MIN_SDK": 9,
     //"C2DM_SENDER": "",
     //"HARDWARE_ACCELERATED": "",
+    //"HOCKEYAPP_APP_ID": "",
     //"NFC_SCHEME": "",
     //"MPMETRICS_API_KEY": "",
     //"RENAME_TARGET": true,

@@ -6,6 +6,7 @@
     "defines": {
         "NDEBUG": 1, 
         "NS_BLOCK_ASSERTIONS": 1, 
+        "OBJC_OLD_DISPATCH_PROTOTYPES": 0, 
         "__IPHONE_OS_VERSION_MIN_REQUIRED": 50100
     }, 
     "deps": [
@@ -236,7 +237,7 @@
             "type": "iquote"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/BUILT_PRODUCTS_DIR/include", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/BUILT_PRODUCTS_DIR/include", 
             "type": "I"
         }, 
         {
@@ -248,11 +249,11 @@
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/DERIVED_FILE_DIR/armv7", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR/armv7", 
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/DERIVED_FILE_DIR", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR", 
             "type": "I"
         }
     ], 

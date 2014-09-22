@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#ifndef APPORTABLE
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
@@ -67,3 +68,4 @@
 @property (nonatomic, assign, getter = isAuthenticated) BOOL authenticated;
 
 @end
+#endif

@@ -22,6 +22,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
+#ifndef APPORTABLE
 #import <CommonCrypto/CommonCryptor.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
@@ -615,3 +617,4 @@
 }
 
 @end
+#endif

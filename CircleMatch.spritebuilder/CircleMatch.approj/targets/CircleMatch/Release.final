@@ -1,7 +1,7 @@
 {
     "assets": [
         {
-            "asset": "../../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/ResourceRules.plist", 
+            "asset": "../../../../../Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/ResourceRules.plist", 
             "target": "ResourceRules.plist"
         }, 
         {
@@ -277,6 +277,10 @@
             "target": "Published-iOS/resources-phone/ccbResources.png"
         }, 
         {
+            "asset": "Source/Resources/Published-iOS/resources-phone/star.png", 
+            "target": "Published-iOS/resources-phone/star.png"
+        }, 
+        {
             "asset": "Source/Resources/Published-iOS/resources-phonehd/Assets.plist", 
             "target": "Published-iOS/resources-phonehd/Assets.plist"
         }, 
@@ -291,6 +295,10 @@
         {
             "asset": "Source/Resources/Published-iOS/resources-phonehd/ccbResources.png", 
             "target": "Published-iOS/resources-phonehd/ccbResources.png"
+        }, 
+        {
+            "asset": "Source/Resources/Published-iOS/resources-phonehd/star.png", 
+            "target": "Published-iOS/resources-phonehd/star.png"
         }, 
         {
             "asset": "Source/Resources/Published-iOS/resources-tablet/Assets.plist", 
@@ -309,6 +317,10 @@
             "target": "Published-iOS/resources-tablet/ccbResources.png"
         }, 
         {
+            "asset": "Source/Resources/Published-iOS/resources-tablet/star.png", 
+            "target": "Published-iOS/resources-tablet/star.png"
+        }, 
+        {
             "asset": "Source/Resources/Published-iOS/resources-tablethd/Assets.plist", 
             "target": "Published-iOS/resources-tablethd/Assets.plist"
         }, 
@@ -323,6 +335,10 @@
         {
             "asset": "Source/Resources/Published-iOS/resources-tablethd/ccbResources.png", 
             "target": "Published-iOS/resources-tablethd/ccbResources.png"
+        }, 
+        {
+            "asset": "Source/Resources/Published-iOS/resources-tablethd/star.png", 
+            "target": "Published-iOS/resources-tablethd/star.png"
         }, 
         {
             "asset": "mgwuSDK.embeddedframework/Resources/operator.connecting.png", 
@@ -470,7 +486,8 @@
         "APPLICATION_IDENTIFIER": "com.apportable.CircleMatch", 
         "APPLICATION_NAME": "CircleMatch", 
         "FEATURES": [
-            "opengles2"
+            "opengles2", 
+            "portrait"
         ], 
         "ICU_CONFIG": "normal", 
         "LONG_VERSION": "1.0", 
@@ -483,16 +500,17 @@
     "defines": {
         "NDEBUG": 1, 
         "NS_BLOCK_ASSERTIONS": 1, 
+        "OBJC_OLD_DISPATCH_PROTOTYPES": 0, 
         "__IPHONE_OS_VERSION_MIN_REQUIRED": 60000
     }, 
     "deps": [
         "UIKit", 
+        "StoreKit", 
         "GLKit", 
         "Security", 
         "CFNetwork", 
         "GameKit", 
         "SystemConfiguration", 
-        "StoreKit", 
         "MessageUI", 
         "Crashlytics", 
         "AdSupport", 
@@ -623,7 +641,7 @@
             "type": "iquote"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/BUILT_PRODUCTS_DIR/include", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/BUILT_PRODUCTS_DIR/include", 
             "type": "I"
         }, 
         {
@@ -691,11 +709,11 @@
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/DERIVED_FILE_DIR/armv7", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR/armv7", 
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpV0hdAz/DERIVED_FILE_DIR", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR", 
             "type": "I"
         }
     ], 
