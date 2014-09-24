@@ -30,6 +30,7 @@
 #ifndef APPORTABLE
 #import <Crashlytics/Crashlytics.h>
 #endif
+#import <AdColony/AdColony.h>
 
 @implementation AppController
 
@@ -46,6 +47,12 @@
 #ifndef APPORTABLE
     [Crashlytics startWithAPIKey:@"b3f968f6cdf4372d174aad54e4647514c1888e83"];
 #endif
+    
+    [AdColony configureWithAppID:@"appee1caf129d4b460fa4"
+                         zoneIDs:@[@"vz5582a970cf82414093"]
+                        delegate:nil
+                         logging:YES];
+    
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support
     configPath = [configPath stringByAppendingPathComponent:@"configCocos2d.plist"];

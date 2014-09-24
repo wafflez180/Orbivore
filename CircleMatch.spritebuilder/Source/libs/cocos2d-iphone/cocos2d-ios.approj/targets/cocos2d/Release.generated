@@ -1,7 +1,7 @@
 {
     "assets": [
         {
-            "asset": "../../../../../var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/TARGET_BUILD_DIR/libcocos2d.a", 
+            "asset": "../../../../../var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/TARGET_BUILD_DIR/libcocos2d.a", 
             "target": "../../../../../../../../Users/arthuraraujo/Desktop/circlematch-repo/CircleMatch.spritebuilder/normal"
         }
     ], 
@@ -2494,7 +2494,7 @@
             "type": "iquote"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/BUILT_PRODUCTS_DIR/include", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/BUILT_PRODUCTS_DIR/include", 
             "type": "I"
         }, 
         {
@@ -2714,11 +2714,11 @@
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR/armv7", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR/armv7", 
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR", 
             "type": "I"
         }
     ], 

@@ -249,6 +249,10 @@
             "target": "CrossPromoViewController.nib"
         }, 
         {
+            "asset": "GoogleMobileAdsSdkiOS-6.12.0/README.txt", 
+            "target": "README.txt"
+        }, 
+        {
             "asset": "mgwuSDK.embeddedframework/Resources/MGWUBackground-Portrait~iphone.png", 
             "target": "MGWUBackground-Portrait~iphone.png"
         }, 
@@ -364,7 +368,11 @@
     }, 
     "deps": [
         "UIKit", 
-        "StoreKit", 
+        "MediaPlayer", 
+        "CoreMedia", 
+        "EventKit", 
+        "EventKitUI", 
+        "CoreTelephony", 
         "GLKit", 
         "Security", 
         "CFNetwork", 
@@ -372,7 +380,6 @@
         "SystemConfiguration", 
         "MessageUI", 
         "Crashlytics", 
-        "AdSupport", 
         "iAd", 
         "QuartzCore", 
         "mgwuSDK", 
@@ -381,6 +388,7 @@
         "AudioToolbox", 
         "AVFoundation", 
         "UIKit", 
+        "AdColony", 
         "Foundation", 
         "CoreGraphics", 
         "CoreText"
@@ -451,6 +459,141 @@
                     "prefix": "Source/", 
                     "suffix": "AppDelegate.h"
                 }, 
+                "DFPBannerView.h": {
+                    "key": "DFPBannerView.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "DFPBannerView.h"
+                }, 
+                "DFPExtras.h": {
+                    "key": "DFPExtras.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "DFPExtras.h"
+                }, 
+                "DFPInterstitial.h": {
+                    "key": "DFPInterstitial.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "DFPInterstitial.h"
+                }, 
+                "DFPSwipeableBannerView.h": {
+                    "key": "DFPSwipeableBannerView.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "DFPSwipeableBannerView.h"
+                }, 
+                "GADAdMobExtras.h": {
+                    "key": "GADAdMobExtras.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADAdMobExtras.h"
+                }, 
+                "GADAdNetworkExtras.h": {
+                    "key": "GADAdNetworkExtras.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADAdNetworkExtras.h"
+                }, 
+                "GADAdSize.h": {
+                    "key": "GADAdSize.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADAdSize.h"
+                }, 
+                "GADAdSizeDelegate.h": {
+                    "key": "GADAdSizeDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "GADAdSizeDelegate.h"
+                }, 
+                "GADAppEventDelegate.h": {
+                    "key": "GADAppEventDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "GADAppEventDelegate.h"
+                }, 
+                "GADBannerView.h": {
+                    "key": "GADBannerView.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADBannerView.h"
+                }, 
+                "GADBannerViewDelegate.h": {
+                    "key": "GADBannerViewDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADBannerViewDelegate.h"
+                }, 
+                "GADCustomEventBanner.h": {
+                    "key": "GADCustomEventBanner.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventBanner.h"
+                }, 
+                "GADCustomEventBannerDelegate.h": {
+                    "key": "GADCustomEventBannerDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventBannerDelegate.h"
+                }, 
+                "GADCustomEventExtras.h": {
+                    "key": "GADCustomEventExtras.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventExtras.h"
+                }, 
+                "GADCustomEventInterstitial.h": {
+                    "key": "GADCustomEventInterstitial.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventInterstitial.h"
+                }, 
+                "GADCustomEventInterstitialDelegate.h": {
+                    "key": "GADCustomEventInterstitialDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventInterstitialDelegate.h"
+                }, 
+                "GADCustomEventRequest.h": {
+                    "key": "GADCustomEventRequest.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Mediation/", 
+                    "suffix": "GADCustomEventRequest.h"
+                }, 
+                "GADInAppPurchase.h": {
+                    "key": "GADInAppPurchase.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADInAppPurchase.h"
+                }, 
+                "GADInAppPurchaseDelegate.h": {
+                    "key": "GADInAppPurchaseDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADInAppPurchaseDelegate.h"
+                }, 
+                "GADInterstitial.h": {
+                    "key": "GADInterstitial.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADInterstitial.h"
+                }, 
+                "GADInterstitialDelegate.h": {
+                    "key": "GADInterstitialDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADInterstitialDelegate.h"
+                }, 
+                "GADModules.h": {
+                    "key": "GADModules.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADModules.h"
+                }, 
+                "GADRequest.h": {
+                    "key": "GADRequest.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADRequest.h"
+                }, 
+                "GADRequestError.h": {
+                    "key": "GADRequestError.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/", 
+                    "suffix": "GADRequestError.h"
+                }, 
+                "GADSearchBannerView.h": {
+                    "key": "GADSearchBannerView.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Search/", 
+                    "suffix": "GADSearchBannerView.h"
+                }, 
+                "GADSearchRequest.h": {
+                    "key": "GADSearchRequest.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/Search/", 
+                    "suffix": "GADSearchRequest.h"
+                }, 
+                "GADSwipeableBannerViewDelegate.h": {
+                    "key": "GADSwipeableBannerViewDelegate.h", 
+                    "prefix": "GoogleMobileAdsSdkiOS-6.12.0/Add-ons/DoubleClick/", 
+                    "suffix": "GADSwipeableBannerViewDelegate.h"
+                }, 
                 "MainScene.h": {
                     "key": "MainScene.h", 
                     "prefix": "Source/", 
@@ -500,7 +643,7 @@
             "type": "iquote"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/BUILT_PRODUCTS_DIR/include", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/BUILT_PRODUCTS_DIR/include", 
             "type": "I"
         }, 
         {
@@ -568,11 +711,11 @@
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR/armv7", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR/armv7", 
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpKaCWic/DERIVED_FILE_DIR", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR", 
             "type": "I"
         }
     ], 
@@ -582,7 +725,9 @@
     "libs": [
         "z", 
         "sqlite3", 
-        "z"
+        "z.1.2.5", 
+        "z", 
+        "GoogleAdMobAds"
     ], 
     "modules": [
         {

@@ -60,8 +60,7 @@
     //   "write_external_storage"
     //   "write_settings"
     //   "xperia"
-    "FEATURES": ["opengles2","portrait"],
-
+    "FEATURES": ["portrait", "internet", "access_network_state", "read_phone_state", "write_external_storage"],
     // Preferred way of handling URLs in the code.
     // Leave it null for most cases.
     //"URL_SCHEME": null,
@@ -193,7 +192,9 @@
     // A list of dependencies.  Typically these correspond to
     // frameworks in the xcode project.
     "deps": [
-    ],
+        "AdMob",
+        "AdColony"
+],
     
     // A list of source files (e.g. .m, .mm, .c, .cc, and .cpp) files to build.
     // Source files can be a string, e.g. "./main.c", or a dictionary specifying

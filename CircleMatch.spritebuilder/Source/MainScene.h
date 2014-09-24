@@ -7,26 +7,24 @@
 //
 
 #import "CCNode.h"
+#import "GADBannerView.h"
+
 #ifndef APPORTABLE
 #include <iAd/iAd.h>
 #import "ABGameKitHelper.h"
-#else
-#import "GADBannerView.h"
 #endif
 
-@interface MainScene : CCNode <CCPhysicsCollisionDelegate,
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate, GADBannerViewDelegate
+
 #ifndef APPORTABLE
-ADBannerViewDelegate>
-#else
-GADBannerViewDelegate>
+, ADBannerViewDelegate
 #endif
+>
 
 @property (nonatomic) float spawnRate;
 
 #ifndef APPORTABLE
 @property ADBannerView* adView;
-#else
-@property GADBannerView* googleadView;
 #endif
 
 @end

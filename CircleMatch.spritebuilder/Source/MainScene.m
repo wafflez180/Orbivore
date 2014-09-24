@@ -10,11 +10,11 @@
 #import "circleBlue.h"
 #import "circleGreen.h"
 #import "circleOrange.h"
+#import <AdColony/AdColony.h>
+#import "GADBannerView.h"
 #ifndef APPORTABLE
 #import "ABGameKitHelper.h"
 #include <iAd/iAd.h>
-#else
-#import "GADBannerView.h"
 #endif
 
 @implementation MainScene{
@@ -260,6 +260,10 @@
 -(void)losegame{
     
     if (paused == FALSE) {
+#ifndef APPORTABLE
+#else
+        [AdColony playVideoAdForZone:@"vz5582a970cf82414093" withDelegate:nil];
+#endif
         
         howmanytimeslost++;
         
@@ -855,7 +859,11 @@
         _adView.delegate = self;
         
     }
+    
+    [self layoutAnimated:YES];
+    
 #else
+    
     float screenBounds = [UIScreen mainScreen].bounds.size.height;
     
     float tempint = screenBounds;
@@ -870,7 +878,7 @@
     
     GadView.delegate = self;
     GadView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-
+    
     GadView.adUnitID = @"ca-app-pub-2396206924319009/8591272379";
     
     //Request an ad without any additional targeting information.
@@ -882,19 +890,15 @@
     
     // test devivce
     
-    request.testing = YES;
     request.testDevices = [NSArray arrayWithObjects:@"07C49734-A38B-4113-A7D3-EDB070B62BCC", nil];
-
     
     [GadView loadRequest:request];
     
     //Place the ad view onto the screen.
     [[[CCDirector sharedDirector]view]addSubview:GadView];
-    [_adView setBackgroundColor:[UIColor clearColor]];
-    [[[CCDirector sharedDirector]view]addSubview:GadView];
+    
 #endif
     
-    [self layoutAnimated:YES];
     return self;
 }
 
