@@ -60,7 +60,7 @@
     //   "write_external_storage"
     //   "write_settings"
     //   "xperia"
-    "FEATURES": ["portrait", "internet", "access_network_state", "read_phone_state", "write_external_storage"],
+    "FEATURES": ["opengles2","touchscreen","portrait", "internet", "access_network_state", "read_phone_state", "write_external_storage"],
     // Preferred way of handling URLs in the code.
     // Leave it null for most cases.
     //"URL_SCHEME": null,

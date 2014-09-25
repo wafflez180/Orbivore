@@ -197,6 +197,10 @@
             "target": "MGWUFacebookLoginPortraitDark.nib"
         }, 
         {
+            "asset": "Source/Resources/Published-iOS/.DS_Store", 
+            "target": "Published-iOS/.DS_Store"
+        }, 
+        {
             "asset": "Source/Resources/Published-iOS/circleBlue.ccbi", 
             "target": "Published-iOS/circleBlue.ccbi"
         }, 
@@ -490,6 +494,8 @@
         "APPLICATION_IDENTIFIER": "com.apportable.CircleMatch", 
         "APPLICATION_NAME": "CircleMatch", 
         "FEATURES": [
+            "opengles2", 
+            "touchscreen", 
             "portrait", 
             "internet", 
             "access_network_state", 
@@ -788,7 +794,7 @@
             "type": "iquote"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/BUILT_PRODUCTS_DIR/include", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdFm4yC/BUILT_PRODUCTS_DIR/include", 
             "type": "I"
         }, 
         {
@@ -856,11 +862,11 @@
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR/armv7", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdFm4yC/DERIVED_FILE_DIR/armv7", 
             "type": "I"
         }, 
         {
-            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdRU_q6/DERIVED_FILE_DIR", 
+            "header_path": "/var/folders/p3/d8mny3092jb4wcglp_7wc0sh0000gn/T/tmpdFm4yC/DERIVED_FILE_DIR", 
             "type": "I"
         }
     ], 

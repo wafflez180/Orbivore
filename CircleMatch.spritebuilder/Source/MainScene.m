@@ -11,7 +11,6 @@
 #import "circleGreen.h"
 #import "circleOrange.h"
 #import <AdColony/AdColony.h>
-#import "GADBannerView.h"
 #ifndef APPORTABLE
 #import "ABGameKitHelper.h"
 #include <iAd/iAd.h>
@@ -578,7 +577,7 @@
         explosion.positionInPoints = ccp(explosion.positionInPoints.x, explosion.positionInPoints.y + (fake.positionInPoints.y / 15));
     
         // add the particle effect to the same node the seal is on
-        explosion.zOrder = 500;
+        explosion.zOrder = 1000;
     
         [fake.parent addChild:explosion];
         
@@ -823,12 +822,13 @@
 
 # pragma mark - iAd code
 
+#ifndef APPORTABLE
+
 -(id)init
 {
-    
-#ifndef APPORTABLE
     if( (self= [super init]) )
     {
+        
         // On iOS 6 ADBannerView introduces a new initializer, use it when available.
         if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
             _adView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
@@ -862,54 +862,18 @@
     
     [self layoutAnimated:YES];
     
-#else
-    
-    float screenBounds = [UIScreen mainScreen].bounds.size.height;
-    
-    float tempint = screenBounds;
-    
-    ///   Create and setup the ad view, specifying the size and origin at {0, 0}.
-    GADBannerView *GadView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-    
-    CGRect gadFrame = GadView.frame;
-    gadFrame.origin.y = tempint - GadView.frame.size.height;
-    gadFrame.origin.x = self.contentSizeInPoints.width / 2;
-    GadView.frame = gadFrame;
-    
-    GadView.delegate = self;
-    GadView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    GadView.adUnitID = @"ca-app-pub-2396206924319009/8591272379";
-    
-    //Request an ad without any additional targeting information.
-    
-    GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for
-    // the simulator as well as any devices you want to receive test ads.
-    
-    // test devivce
-    
-    request.testDevices = [NSArray arrayWithObjects:@"07C49734-A38B-4113-A7D3-EDB070B62BCC", nil];
-    
-    [GadView loadRequest:request];
-    
-    //Place the ad view onto the screen.
-    [[[CCDirector sharedDirector]view]addSubview:GadView];
-    
-#endif
-    
     return self;
 }
+#endif
+
 
 #ifndef APPORTABLE
-
 - (void)layoutAnimated:(BOOL)animated
 {
     // As of iOS 6.0, the banner will automatically resize itself based on its width.
     // To support iOS 5.0 however, we continue to set the currentContentSizeIdentifier appropriately.
     CGRect contentFrame = [CCDirector sharedDirector].view.bounds;
-
+    
         _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     
     CGRect bannerFrame = _bannerView.frame;
@@ -932,8 +896,6 @@
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
     [self layoutAnimated:YES];
 }
-
 #endif
-
 
 @end

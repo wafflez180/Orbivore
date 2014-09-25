@@ -25,9 +25,26 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "GADBannerView.h"
+
+typedef enum _bannerType
+{
+    kBanner_Portrait_Top,
+    kBanner_Portrait_Bottom,
+    kBanner_Landscape_Top,
+    kBanner_Landscape_Bottom,
+}CocosBannerType;
+
+#define BANNER_TYPE kBanner_Portrait_Bottom
 
 @interface AppController : CCAppDelegate
 {
+    CocosBannerType mBannerType;
+    GADBannerView *mBannerView;
+    float on_x, on_y, off_x, off_y;
 }
 
+
+-(void)hideBannerView;
+-(void)showBannerView;
 @end
